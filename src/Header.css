@@ -1,0 +1,66 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .search-bar input {
+    width: auto;
+    height: inherit;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navigation li {
+    display: inline-block;
+  }
+  
+  .navigation a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .highlight a{
+    color: red;
+  }
+  
+  .user-actions a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .user-actions a:hover {
+    color: #ffcc00;
+  }
+  .ofertas a{
+    color: red;
+  }
+  .ardidas a {
+    color: black;
+    text-decoration: none;
+  }
