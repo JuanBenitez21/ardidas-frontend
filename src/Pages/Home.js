@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header } from './Header';
+import { Header } from '../layouts/Header';
 import { Carousel } from 'react-responsive-carousel';
-import {InfoHome} from './InfoHome';
+import {InfoHome} from '../components/InfoHome';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './Carousel.css';
+import'../assets/styles/Carousel.css';
 
 
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Loging.css';
-import { Header } from './Header';
+import '../assets/styles/Loging.css'
+import { Header } from '../layouts/Header';
 
 export default function Loging() {
     

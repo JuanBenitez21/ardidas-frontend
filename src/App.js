@@ -1,20 +1,21 @@
 import { useRoutes, BrowserRouter} from 'react-router-dom';
 import React from 'react';
-import { Home } from './Home';
-import { Guayos } from './Guayos';
-import {Guantes} from './Guantes'
-import {Camisetas} from './Camisetas'
-import {Canilleras} from './Canilleras';
-import {Ofertas} from './Ofertas';
-import {Loging} from './Loging';
+import { Home } from './Pages/Home';
+import { Guayos } from './Pages/Guayos';
+import {Guantes} from './Pages/Guantes'
+import {Camisetas} from './Pages/Camisetas'
+import {Canilleras} from './Pages/Canilleras';
+import {Ofertas} from './Pages/Ofertas';
+import {Loging} from './components/Loging';
 
 
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './Carousel.css';
-import Register from './Register';
-import { InfoHome } from './InfoHome';
-import { Form } from 'react-router-dom';
+import './assets/styles/Carousel.css';
+import Register from './components/Register';
+
+//import { InfoHome } from './InfoHome';
+//import { Form } from 'react-router-dom';
 
 const AppRoutes= ()=>{
   let routes= useRoutes([
