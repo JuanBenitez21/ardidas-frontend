@@ -2,6 +2,7 @@ import React from 'react';
 import '../assets/styles/InfoHome.css';
 
 
+
 function InfoHome() {
     return (
       <div class="container">
