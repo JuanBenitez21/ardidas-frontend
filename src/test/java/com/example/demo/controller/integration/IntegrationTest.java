@@ -22,7 +22,7 @@ public class IntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    /*@Test
+    @Test
     void TestProductoController() {
         ProductoDTO nuevoProducto = new ProductoDTO("Giorno","Giovanna",5000,1L,10,"XS","Passione" );
         ResponseEntity<String> respuesta = restTemplate.postForEntity("/producto",nuevoProducto, String.class);
@@ -36,7 +36,7 @@ public class IntegrationTest {
 
     @Test
     void TestOrdenController() {
-        OrdenDTO nuevaOrden = new OrdenDTO(1L, LocalDate.now(),10,3000);
+        OrdenDTO nuevaOrden = new OrdenDTO(1L, LocalDate.now(),10, 3000.0);
         ResponseEntity<String> respuestaInsercion = restTemplate.postForEntity("/registrar", nuevaOrden, String.class);
         System.out.println(respuestaInsercion);
         Assertions.assertEquals("Orden guardada", respuestaInsercion.getBody());
@@ -44,5 +44,5 @@ public class IntegrationTest {
         Assertions.assertFalse(Objects.requireNonNull(resultado.getBody()).isEmpty());
         Assertions.assertTrue(resultado.getStatusCode().is2xxSuccessful());
 
-    }*/
+    }
 }
