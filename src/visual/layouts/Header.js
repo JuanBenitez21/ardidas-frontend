@@ -1,7 +1,9 @@
 import React from 'react';
-import './Header.css';
-import ArdidasImage from './img/Ardidas.jpeg';
-import { TodoSearch } from './TodoSearch';
+//import './assets/styles/Header.css';
+import '../assets/styles/Header.css'
+import ArdidasImage from '../assets/img/Ardidas.jpeg';
+
+import { TodoSearch } from '../components/TodoSearch';
 
 const Header = () => {
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header } from './Header';
+import { Header } from '../layouts/Header';
 
 function Ofertas() {
     return (
       <>
-       <Header />    
+       <Header />
        </>
     );
   }

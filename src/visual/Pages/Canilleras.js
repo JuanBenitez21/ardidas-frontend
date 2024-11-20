@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from './Header';
+import { Header } from '../layouts/Header';
 
-function Guayos() {
+function Canilleras() {
     return (
       <>
        <Header />    
@@ -9,5 +9,5 @@ function Guayos() {
     );
   }
   
-  export {Guayos};
+  export {Canilleras};
   

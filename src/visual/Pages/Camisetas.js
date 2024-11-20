@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from './Header';
+import { Header } from '../layouts/Header';
 
-function Canilleras() {
+function Camisetas() {
     return (
       <>
        <Header />    
@@ -9,5 +9,5 @@ function Canilleras() {
     );
   }
   
-  export {Canilleras};
+  export {Camisetas};
   
