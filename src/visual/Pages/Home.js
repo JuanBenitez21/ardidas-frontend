@@ -4,6 +4,8 @@ import { Carousel } from 'react-responsive-carousel';
 import {InfoHome} from '../components/InfoHome';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import'../assets/styles/Carousel.css';
+import Productos from '../components/Productos'; // Asegúrate de que la ruta sea correcta
+
 
 
 
@@ -37,6 +39,8 @@ function Home() {
       </Carousel>
       
       <InfoHome/>
+      <Productos /> {/* Asegúrate de que este componente esté aquí */}
+
      </>
   );
 }

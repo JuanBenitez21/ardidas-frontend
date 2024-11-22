@@ -7,12 +7,11 @@ import {Camisetas} from './visual/Pages/Camisetas'
 import {Canilleras} from './visual/Pages/Canilleras';
 import {Ofertas} from './visual/Pages/Ofertas';
 import {Loging} from './visual/components/Loging';
-
-
-
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './visual/assets/styles/Carousel.css';
 import Register from './visual/components/Register';
+
+import Productos from './visual/components/Productos'; // Asegúrate de importar el componente
 
 //import { InfoHome } from './InfoHome';
 //import { Form } from 'react-router-dom';
@@ -20,6 +19,7 @@ import Register from './visual/components/Register';
 const AppRoutes= ()=>{
   let routes= useRoutes([
     { path: '/', element: <Home /> },
+    { path: '/productos', element: <Productos /> }, // Asegúrate de que esta ruta esté aquí
     { path: '/Guayos', element: <Guayos /> },
     { path: '/Guantes', element: <Guantes /> },
     { path: '/Camisetas', element: <Camisetas /> },
