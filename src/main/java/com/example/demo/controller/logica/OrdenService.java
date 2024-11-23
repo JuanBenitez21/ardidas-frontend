@@ -2,10 +2,15 @@ package com.example.demo.controller.logica;
 
 import com.example.demo.db.jpa.OrdenJPA;
 import com.example.demo.db.jpa.ProductoJPA;
+import com.example.demo.db.orm.CategoriaORM;
 import com.example.demo.db.orm.OrdenORM;
 import com.example.demo.db.orm.ProductoORM;
+import com.example.demo.rabbit.LowStockEvent;
+import com.example.demo.rabbit.RabbitMQConfig;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,8 +22,7 @@ public class OrdenService {
 
     private final OrdenJPA ordenJPA;
     private final ProductoJPA productoJPA;
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     public OrdenORM guardarOrden(Long producto, int cantidad ) {
         ProductoORM productoORM= productoJPA.findById(producto).orElseThrow(() -> new RuntimeException("No existe el producto"));
@@ -32,6 +36,9 @@ public class OrdenService {
         nuevaOrden.setCantidad(cantidad);
         nuevaOrden.setPrecio(this.calcularPrecioOrden(precio, cantidad));
         productoORM.setStock(productoORM.getStock() - cantidad);
+        productoJPA.save(productoORM);
+        verificarYPublicarEvento(productoORM);
+
         return ordenJPA.save(nuevaOrden);
     }
 
@@ -45,5 +52,21 @@ public class OrdenService {
 
     public double calcularPrecioOrden(double precio, int cantidad) {
         return precio*cantidad;
+    }
+
+    public void verificarYPublicarEvento(ProductoORM producto) {
+        if(producto.getStock() < producto.getNivelMinimo()){
+            CategoriaORM categoriaORM = producto.getCategoria();
+            String categoria = categoriaORM.getNombre();
+            LowStockEvent evento = new LowStockEvent(
+                    producto.getId(),
+                    producto.getNombre(),
+                    categoria,
+                    producto.getStock(),
+                    producto.getNivelMinimo(),
+                    LocalDate.now()
+            );
+            rabbitTemplate.convertAndSend(RabbitMQConfig.STOCK_LOW_EXCHANGE,"",evento);
+        }
     }
 }
