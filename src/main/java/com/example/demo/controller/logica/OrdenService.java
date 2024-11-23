@@ -5,6 +5,7 @@ import com.example.demo.db.jpa.ProductoJPA;
 import com.example.demo.db.orm.OrdenORM;
 import com.example.demo.db.orm.ProductoORM;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,6 +17,8 @@ public class OrdenService {
 
     private final OrdenJPA ordenJPA;
     private final ProductoJPA productoJPA;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public OrdenORM guardarOrden(Long producto, int cantidad ) {
         ProductoORM productoORM= productoJPA.findById(producto).orElseThrow(() -> new RuntimeException("No existe el producto"));

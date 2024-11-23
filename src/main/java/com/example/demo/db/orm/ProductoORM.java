@@ -33,5 +33,7 @@ public class ProductoORM {
     @Column
     private String imagen;
 
+    private int NivelMinimo=10;
+
 
 }
