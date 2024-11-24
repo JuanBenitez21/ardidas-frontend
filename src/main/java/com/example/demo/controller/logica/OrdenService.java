@@ -20,9 +20,12 @@ import java.util.List;
 @AllArgsConstructor
 public class OrdenService {
 
+
     private final OrdenJPA ordenJPA;
     private final ProductoJPA productoJPA;
     private final RabbitTemplate rabbitTemplate;
+
+
 
     public OrdenORM guardarOrden(Long producto, int cantidad ) {
         ProductoORM productoORM= productoJPA.findById(producto).orElseThrow(() -> new RuntimeException("No existe el producto"));
@@ -41,6 +44,7 @@ public class OrdenService {
 
         return ordenJPA.save(nuevaOrden);
     }
+
 
     public List<OrdenORM> consultarOrden(LocalDate fecha) {
         List<OrdenORM> list = ordenJPA.findByFecha(fecha);
