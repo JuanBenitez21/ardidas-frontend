@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+
 public class CategoriaORM {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

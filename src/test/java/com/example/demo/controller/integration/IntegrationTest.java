@@ -27,7 +27,7 @@ public class IntegrationTest {
         ProductoDTO nuevoProducto = new ProductoDTO("Giorno","Giovanna",5000,1L,10,"XS","Passione" );
         ResponseEntity<String> respuesta = restTemplate.postForEntity("/producto",nuevoProducto, String.class);
         System.out.println(respuesta);
-        Assertions.assertEquals(HttpStatus.CREATED, respuesta.getBody());
+        Assertions.assertEquals(HttpStatus.CREATED, respuesta.getStatusCode());
         ResponseEntity<List> resultado = restTemplate.getForEntity("/mercancia", List.class);
         Assertions.assertFalse(Objects.requireNonNull(resultado.getBody()).isEmpty());
         Assertions.assertTrue(resultado.getStatusCode().is2xxSuccessful());
@@ -36,11 +36,12 @@ public class IntegrationTest {
 
     @Test
     void TestOrdenController() {
+        LocalDate fecha = LocalDate.of(2024, 5, 25); // Fecha fija para pruebas
         OrdenDTO nuevaOrden = new OrdenDTO(1L, LocalDate.now(),10, 3000.0);
         ResponseEntity<String> respuestaInsercion = restTemplate.postForEntity("/registrar", nuevaOrden, String.class);
         System.out.println(respuestaInsercion);
         Assertions.assertEquals("Orden guardada", respuestaInsercion.getBody());
-        ResponseEntity<List> resultado = restTemplate.getForEntity("/ventas?fecha=2024-05-25", List.class);
+        ResponseEntity<List> resultado = restTemplate.getForEntity("/ventas?fecha="+fecha.toString(), List.class);
         Assertions.assertFalse(Objects.requireNonNull(resultado.getBody()).isEmpty());
         Assertions.assertTrue(resultado.getStatusCode().is2xxSuccessful());
 

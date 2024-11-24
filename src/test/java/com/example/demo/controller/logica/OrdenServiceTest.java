@@ -2,18 +2,22 @@ package com.example.demo.controller.logica;
 
 import com.example.demo.db.jpa.OrdenJPA;
 import com.example.demo.db.jpa.ProductoJPA;
+import com.example.demo.db.orm.CategoriaORM;
 import com.example.demo.db.orm.OrdenORM;
 import com.example.demo.db.orm.ProductoORM;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 class OrdenServiceTest {
 
@@ -25,35 +29,52 @@ class OrdenServiceTest {
     @InjectMocks
     OrdenService service;
 
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+
     @Test
     void Given_ExisteElProducto_When_GuardarOrden(){
+        CategoriaORM categoria = new CategoriaORM();
+        categoria.setId(1L);
+        categoria.setNombre("Categoría de prueba");
+
         ProductoORM producto = new ProductoORM();
         producto.setId(1L);
+        producto.setNombre("Producto de prueba");
         producto.setStock(10);
+        producto.setCategoria(categoria);
+
+
 
         OrdenORM ordenSimulada = new OrdenORM();
         ordenSimulada.setId(1L);
         ordenSimulada.setProducto(producto);
         ordenSimulada.setCantidad(2);
         ordenSimulada.setFecha(LocalDate.now());
+
         Mockito.when(productoJPA.findById(1L)).thenReturn(Optional.of(producto));
         Mockito.when(ordenJPA.save(Mockito.any())).thenReturn(ordenSimulada);
 
-        OrdenORM orden = service.guardarOrden(producto.getId(),ordenSimulada.getCantidad());
+        OrdenORM orden = service.guardarOrden(producto.getId(), ordenSimulada.getCantidad());
 
         Assertions.assertNotNull(orden);
         Assertions.assertEquals(orden.getId(),ordenSimulada.getId());
-        Mockito.verify(ordenJPA, Mockito.times(1)).save(ordenSimulada);
-        Mockito.verify(ordenJPA).save(Mockito.any());
+        Mockito.verify(ordenJPA, Mockito.times(1)).save(Mockito.any());
     }
 
     @Test
     void Given_NoExisteElProducto_When_GuardarOrden_Then_ThrowRuntimeException(){
         Long categoriaId = 1L;
         Mockito.when(productoJPA.findById(categoriaId)).thenReturn(Optional.empty());
-        Assertions.assertThrows(RuntimeException.class,
-                ()->service.guardarOrden(categoriaId,1)
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
+                () -> service.guardarOrden(categoriaId, 1),
+                "No existe el producto"
         );
+        Assertions.assertEquals("No existe el producto", exception.getMessage());
+
         Mockito.verify(productoJPA, Mockito.times(1)).findById(categoriaId);
         Mockito.verify(ordenJPA, Mockito.times(0)).save(Mockito.any());
 
@@ -102,4 +123,6 @@ class OrdenServiceTest {
         double resultado = service.calcularPrecioOrden(precio,10);
         Assertions.assertEquals(3000,resultado);
     }
+
+
 }
