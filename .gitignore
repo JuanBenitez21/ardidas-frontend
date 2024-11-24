@@ -24,3 +24,5 @@ yarn-error.log*
 
 # vscode
 .vscode
+/.idea/modules/demo.main.iml
+/.idea/modules.xml
