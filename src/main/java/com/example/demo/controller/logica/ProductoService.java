@@ -7,7 +7,6 @@ import com.example.demo.db.orm.CategoriaORM;
 import com.example.demo.db.orm.ProductoORM;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -33,4 +32,6 @@ public class ProductoService {
  public List<ProductoORM> consultarProductos() {
   return productoJPA.findAll();
  }
+
+
 }
